@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 import json, time
 
 firefox_options = Options() 
-firefox_options.add_argument('--headless')
+# firefox_options.add_argument('--headless')
 firefox_options.add_argument('--disable-gpu')
 firefox_options.add_argument("--User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0")
 firefox_options.add_argument('--blink-settings=imagesEnabled=false')
@@ -15,6 +15,8 @@ firefox_options.add_argument('--window-size=1920,1080')
 firefox_service = Service()
 
 browser = webdriver.Firefox(options=firefox_options, service=firefox_service)
+browser.get("about:blank")
+blank_window = browser.current_window_handle
 
 def info_decorator(func):
     def wrapper(*args, **kwargs):
@@ -33,6 +35,7 @@ def info_decorator(func):
 def wuai_sign(browser, cookie_file):
     try:
         print("开始 吾爱破解 签到")
+        browser.switch_to.new_window("wuai")
         browser.get("https://www.52pojie.cn/")
 
         print("清除预设 cookies")
@@ -48,6 +51,8 @@ def wuai_sign(browser, cookie_file):
     except Exception as e:
         print("[错误]：无法访问网站或装载 cookies，请检查网络或 cookies 文件是否损坏，以及网站目前是否可用。错误信息如下：\n"+str(e))
         browser.delete_all_cookies()
+        browser.close()
+        browser.switch_to.window(blank_window)
         return
     
     try:
@@ -55,6 +60,7 @@ def wuai_sign(browser, cookie_file):
             browser.find_element(by=By.XPATH, value='''//div[@id="hd"]//div[@id="um"]//img[@src="https://static.52pojie.cn/static/image/common/wbs.png"]''')
             print("[警告]：已经签到过了")
         except:
+            browser.find_element(by=By.XPATH, value='''//*[@id="um"]/p[2]/a[1]/img''').click()
             print("签到成功！更新本地 cookies")
             cookies = browser.get_cookies()
             json.dump(cookies, open(cookie_file, "w", encoding="utf-8"), ensure_ascii=False, indent=4)
@@ -62,11 +68,14 @@ def wuai_sign(browser, cookie_file):
         print("[错误]：无法签到！错误信息如下：\n"+str(e))
     
     browser.delete_all_cookies()
+    browser.close()
+    browser.switch_to.window(blank_window)
 
 @info_decorator 
 def rousi_sign(browser, cookie_file):
     try:
         print("开始 rouzi.zip 签到")
+        browser.switch_to.new_window("rouzi")
         browser.get("https://rousi.zip/index.php")
 
         print("清除预设 cookies")
@@ -82,6 +91,8 @@ def rousi_sign(browser, cookie_file):
     except Exception as e:
         print("[错误]：无法访问网站或装载 cookies，请检查网络或 cookies 文件是否损坏，以及网站目前是否可用。错误信息如下：\n"+str(e))
         browser.delete_all_cookies()
+        browser.close()
+        browser.switch_to.window(blank_window)
         return
     
     try:
@@ -97,11 +108,14 @@ def rousi_sign(browser, cookie_file):
         print("[错误]：无法签到！请将下列信息提交给开发者\n"+str(e))
     
     browser.delete_all_cookies()
+    browser.close()
+    browser.switch_to.window(blank_window)
 
 @info_decorator
 def hifini_sign(browser, cookie_file):
     try:
         print("开始 hifini 签到")
+        browser.switch_to.new_window("hifini")
         browser.get("https://www.hifini.com/")
 
         print("清除预设 cookies")
@@ -117,6 +131,8 @@ def hifini_sign(browser, cookie_file):
     except Exception as e:
         print("[错误]：无法访问网站或装载 cookies，请检查网络或 cookies 文件是否损坏，以及网站目前是否可用。错误信息如下：\n"+str(e))
         browser.delete_all_cookies()
+        browser.close()
+        browser.switch_to.window(blank_window)
         return
     
     try:
@@ -132,11 +148,14 @@ def hifini_sign(browser, cookie_file):
         print("[错误]：无法签到！请将下列信息提交给开发者\n"+str(e))
     
     browser.delete_all_cookies()
+    browser.close()
+    browser.switch_to.window(blank_window)
 
 @info_decorator
 def pcbeta_sign(browser, cookie_file):
     try:
         print("开始 远景论坛 签到")
+        browser.switch_to.new_window("pcbeta")
         browser.get("https://i.pcbeta.com/home.php?mod=task&do=view&id=149")
 
         print("清除预设 cookies")
@@ -152,6 +171,8 @@ def pcbeta_sign(browser, cookie_file):
     except Exception as e:
         print("[错误]：无法访问网站或装载 cookies，请检查网络或 cookies 文件是否损坏，以及网站目前是否可用。错误信息如下：\n"+str(e))
         browser.delete_all_cookies()
+        browser.close()
+        browser.switch_to.window(blank_window)
         return
     
     try:
@@ -167,6 +188,8 @@ def pcbeta_sign(browser, cookie_file):
         print("[错误]：无法签到！请将下列信息提交给开发者\n"+str(e))
     
     browser.delete_all_cookies()
+    browser.close()
+    browser.switch_to.window(blank_window)
 
 if __name__ == "__main__":
     rank, total = 0, 4
