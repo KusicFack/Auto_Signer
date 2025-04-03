@@ -2,10 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
-import json, time
+import json
 
 firefox_options = Options() 
-# firefox_options.add_argument('--headless')
+firefox_options.add_argument('--headless')
 firefox_options.add_argument('--disable-gpu')
 firefox_options.add_argument("--User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0")
 firefox_options.add_argument('--blink-settings=imagesEnabled=false')
