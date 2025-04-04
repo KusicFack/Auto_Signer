@@ -203,7 +203,7 @@ def pcbeta_sign(browser, cookie_file):
 if __name__ == "__main__":
     rank, total = 0, 4
     wuai_sign(browser, "cookies/wuai_cookie.json")
-    # rousi_sign(browser, "cookies/rouzi_cookie.json")
-    # hifini_sign(browser, "cookies/hifini_cookie.json")
-    # pcbeta_sign(browser, "cookies/pcbeta_cookie.json")
+    rousi_sign(browser, "cookies/rouzi_cookie.json")
+    hifini_sign(browser, "cookies/hifini_cookie.json")
+    pcbeta_sign(browser, "cookies/pcbeta_cookie.json")
     browser.quit()
