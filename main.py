@@ -4,7 +4,7 @@ from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import json,os,time
+import json,os
 
 firefox_options = Options() 
 firefox_options.add_argument('--headless')
