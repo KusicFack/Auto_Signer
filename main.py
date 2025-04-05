@@ -8,10 +8,10 @@ import json,os
 
 firefox_options = Options() 
 firefox_options.add_argument('--headless')
-firefox_options.add_argument('--disable-gpu')
-firefox_options.add_argument("--User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0")
+firefox_options.set_preference("general.useragent.override","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0")
 firefox_options.set_preference('permissions.default.image',2)
-firefox_options.add_argument('--window-size=1920,1080')
+firefox_options.add_argument('--width=1920')
+firefox_options.add_argument('--height=1080')
 
 # firefox_service = Service("/data/data/com.termux/files/usr/bin/geckodriver")
 firefox_service = Service()
@@ -59,17 +59,21 @@ def wuai_sign(browser, cookie_file):
         return
     
     try:
-        locator = (By.XPATH, '''//div[@id="ct"]/div[1]/div/div/table/tbody/tr[3]/td[2]/a[@href="javascript:;"]''')
-        WebDriverWait(browser, 10).until(
+        locator = (By.XPATH, '''//div[@id="ct"]/div[1]/div/div/table/tbody/tr[3]/td[2]/a''')
+        WebDriverWait(browser, 20, 1).until(
             EC.presence_of_element_located(locator)
         )
-        with open("wuai.html", "w", encoding="utf-8") as f:
-            f.write(browser.page_source)
-        sign_label = browser.find_element(by=By.XPATH, value='''//div[@id="ct"]/div[1]/div/div/table/tbody/tr[3]/td[2]/a[@href="javascript:;"]''')
-        if "再次申请" in sign_label.get_attribute("onclick").strip():
+        sign_label = browser.find_element(by=By.XPATH, value='''//div[@id="ct"]/div[1]/div/div/table/tbody/tr[3]/td[2]/a''')
+        if sign_label.get_attribute("onclick"):
             print("[警告]：已经签到过了")
         else:
-            sign_label.click()
+            browser.execute_script("arguments[0].click();", sign_label)
+            new_locator = (By.XPATH, '''//*[@id="ct"]/div[1]/div/div/table/tbody/tr[3]/td[2]/p/a''')
+            WebDriverWait(browser, 20, 1).until(
+                EC.presence_of_element_located(new_locator)
+            )
+            take_label = browser.find_element(by=By.XPATH, value='''//*[@id="ct"]/div[1]/div/div/table/tbody/tr[3]/td[2]/p/a''')
+            browser.execute_script("arguments[0].click();", take_label)
             print("签到成功！更新本地 cookies")
             cookies = browser.get_cookies()
             json.dump(cookies, open(cookie_file, "w", encoding="utf-8"), ensure_ascii=False, indent=4)
