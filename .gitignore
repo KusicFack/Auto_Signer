@@ -1,2 +1,4 @@
 .venv
-cookies
+cookies/
+__pycache__/
+deprecated/
