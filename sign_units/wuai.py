@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 import json
 
 def wuai_sign(browser, cookie_file, blank_window, rank, total):
@@ -29,11 +30,11 @@ def wuai_sign(browser, cookie_file, blank_window, rank, total):
         return rank
 
     try:
-        if not browser.find_elements(by=By.XPATH, value='''//*[@id="um"]/p[2]/a[1]/img'''):
+        if not (sign_label := browser.find_elements(by=By.XPATH, value='''//*[@id="um"]/p[2]/a[1]/img''')):
             print("[警告]：已经签到过了")
         else:
-            sign_label = browser.find_element(by=By.XPATH, value='''//*[@id="um"]/p[2]/a[1]''')
-            browser.execute_script("arguments[0].click();", sign_label)
+            sign_label = sign_label[0]
+            ActionChains(browser).move_to_element(sign_label).click().perform()
             print("签到成功！更新本地 cookies")
             cookies = browser.get_cookies()
             json.dump(cookies, open(cookie_file, "w", encoding="utf-8"), ensure_ascii=False, indent=4)

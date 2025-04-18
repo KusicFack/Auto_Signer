@@ -18,7 +18,7 @@ firefox_options.add_argument('--height=1080')
 # firefox_service = Service("/data/data/com.termux/files/usr/bin/geckodriver")
 
 # 使用 Windows 时取消下行注释
-firefox_service = Service()
+# firefox_service = Service()
 
 browser = webdriver.Firefox(options=firefox_options, service=firefox_service)
 browser.install_addon(os.path.realpath('webdriver-cleaner.xpi'), temporary=True)
