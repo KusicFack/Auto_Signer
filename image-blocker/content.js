@@ -1,1 +1,1 @@
-console.log("image-blocker avtivated!");
+console.log("image-blocker activated!");

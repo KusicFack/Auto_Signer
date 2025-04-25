@@ -1,2 +1,2 @@
-delete window.navigator.wrappedJSObject.__proto__.webdriver;
-console.log('navigator.webdriver cleaned:', window.navigator.wrappedJSObject.webdriver);
+delete Object.getPrototypeOf(navigator).webdriver;
+console.log('navigator.webdriver cleaned:', navigator.webdriver);
