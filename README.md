@@ -26,9 +26,11 @@ Github 上搜索 Termux 下载安装。安装完成后打开 Termux，在终端�
 此时 Termux 会自动检测可用国内源并检查软件包更新。
 
 ## 2. 安装 Python 和 chromium
-在 Termux 中继续输入 apt install python chromium，此时系统会提示是否继续，键盘输入 Y 然后回车即可。
+在 Termux 中继续输入 apt install python chromium python-pip，此时系统会提示是否继续，键盘输入 Y 然后回车即可。
 
 chromium 软件包中包含了 chromium 浏览器和 chromedriver 浏览器驱动程序。
+
+接下来安装 selenium 包，输入 pip install selenium，等待 pip 程序完成包安装。 
 
 ## 3. 复制脚本文件到 Termux 下
 由于 Termux 通常不会在手机上的“文件管理”之类的应用显示自己的目录，因此需要借助 Linux 命令将文件拷贝到其目录中。为了方便，请先按“文件准备”小节准备好所需压缩包，放在手机的 Download 目录中。
