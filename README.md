@@ -1,17 +1,17 @@
 # 项目介绍
 **Termux + Selenium + Chromium**：在 Android 手机上实现**随时一键签到所有网站**！
 
-注：项目目前还没有实现可以自己添加签到脚本的模块化功能。下面是以[Hifini音乐磁场](https://www.hifini.com/)、[Rousi](https://rousi.zip/index.php)、[远景论坛](https://bbs.pcbeta.com/)三个网站为例。
+注：项目目前还没有实现可以自己添加签到脚本的模块化功能。已实现有[吾爱破解](https://www.52pojie.cn/)、[Hifini音乐磁场](https://www.hifini.com/)、[Rousi](https://rousi.zip/index.php)、[远景论坛](https://bbs.pcbeta.com/)四个网站签到。
 
 # 文件准备
-需要准备的文件是签到自动登录用的 cookies，并放入模板打包为名为 Auto_Signer.zip 的 zip 压缩包。项目 Release 界面已经准备了模板，可以把它解压后再进行文件添加，然后再压缩。
+需要签到自动登录用的 cookies，并放入打包为 Auto_Signer.zip 中的 cookies 目录下。项目 Release 界面已经准备了该压缩包，可以把它解压后再进行文件添加，然后再压缩。
 
 获取自动登录 cookies 流程如下：
-1. 首先打开你的浏览器（建议使用 Edge），进入网站进行登录（若有“自动登录”选项记得勾选）
-2. 登录完成后，在 Edge 中下载安装 Cookie-Editor 扩展，并在已登录的网页页面打开该扩展
+1. 首先打开你的浏览器（请使用 Edge 或 Chrome），进入网站进行登录（若有“自动登录”选项记得勾选）
+2. 登录完成后，在 Edge/Chrome 中下载安装 Cookie-Editor 扩展，并在已登录的网页页面打开该扩展
 3. 选择该扩展下方工具栏最右侧的导出（Export），选择 JSON，此时内容会复制到剪贴板上
 4. 打开模板 cookies 文件下对应的 json 文件（可以用记事本打开），然后粘贴这些内容
-5. 使用有查找和替换功能的记事本进行下列替换："sameSite": null 替换为 "sameSite": "None" ；"sameSite": "lax" 替换为 "sameSite": "Lax"
+5. 使用有查找和替换功能的记事本进行下列替换："sameSite": null 替换为 "sameSite": "None" ；"sameSite": "lax" 替换为 "sameSite": "Lax"，保存文件
 
 对所有网站都进行上述操作，最后将包含所有文件的 Auto_Signer 文件夹压缩为 Auto_Signer.zip。
 
@@ -25,12 +25,12 @@ Github 上搜索 Termux 下载安装。安装完成后打开 Termux，在终端�
 
 此时 Termux 会自动检测可用国内源并检查软件包更新。
 
-## 2. 安装 Python 和 chromium
-在 Termux 中继续输入 apt install python chromium python-pip，此时系统会提示是否继续，键盘输入 Y 然后回车即可。
+## 2. 安装 Python 和 Chromium
+在 Termux 中继续输入 apt install python chromium python-pip xorg-server-xvfb，此时系统会提示是否继续，键盘输入 Y 然后回车即可。
 
 chromium 软件包中包含了 chromium 浏览器和 chromedriver 浏览器驱动程序。
 
-接下来安装 selenium 包，输入 pip install selenium，等待 pip 程序完成包安装。 
+接下来安装 selenium 和 pyvirtualdisplay 包，输入 pip install selenium pyvirtualdisplay，等待 pip 程序完成包安装。 
 
 ## 3. 复制脚本文件到 Termux 下
 由于 Termux 通常不会在手机上的“文件管理”之类的应用显示自己的目录，因此需要借助 Linux 命令将文件拷贝到其目录中。为了方便，请先按“文件准备”小节准备好所需压缩包，放在手机的 Download 目录中。
