@@ -6,10 +6,9 @@ import os
 
 from sign_units.wuai import wuai_sign
 from sign_units.rousi import rousi_sign
-from sign_units.hifini import hifini_sign
 from sign_units.pcbeta import pcbeta_sign
 
-display = Display(backend='xvfb')
+display = Display(backend='xvnc')
 
 chromium_options = ChromiumOptions()
 chromium_options.add_argument('--no-sandbox')
@@ -27,10 +26,9 @@ if __name__ == "__main__":
     browser = webdriver.ChromiumDriver(options=chromium_options, service=chromium_service)
     blank_window = browser.current_window_handle
     
-    rank, total = 0, 4
+    rank, total = 0, 3
     rank = wuai_sign(browser, "cookies/wuai_cookie.json", blank_window, rank, total)
     rank = rousi_sign(browser, "cookies/rouzi_cookie.json", blank_window, rank, total)
-    rank = hifini_sign(browser, "cookies/hifini_cookie.json", blank_window, rank, total)
     rank = pcbeta_sign(browser, "cookies/pcbeta_cookie.json", blank_window, rank, total)
     browser.quit()
     
