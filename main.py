@@ -7,6 +7,7 @@ import os
 from sign_units.wuai import wuai_sign
 from sign_units.rousi import rousi_sign
 from sign_units.pcbeta import pcbeta_sign
+from sign_units.ablesci import ablesci_sign
 
 display = Display(backend='xvnc')
 
@@ -26,10 +27,11 @@ if __name__ == "__main__":
     browser = webdriver.ChromiumDriver(options=chromium_options, service=chromium_service)
     blank_window = browser.current_window_handle
     
-    rank, total = 0, 3
+    rank, total = 0, 4
     rank = wuai_sign(browser, "cookies/wuai_cookie.json", blank_window, rank, total)
     rank = rousi_sign(browser, "cookies/rouzi_cookie.json", blank_window, rank, total)
     rank = pcbeta_sign(browser, "cookies/pcbeta_cookie.json", blank_window, rank, total)
+    rank = ablesci_sign(browser, "cookies/ablesci_cookie.json", blank_window, rank, total)
     browser.quit()
     
     display.stop()
