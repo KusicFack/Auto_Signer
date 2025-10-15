@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import json, os
 
 def rousi_sign(browser, cookie_file, blank_window, rank, total):
@@ -19,7 +21,7 @@ def rousi_sign(browser, cookie_file, blank_window, rank, total):
             browser.add_cookie(cookie)
 
         print("开始签到...")
-        browser.refresh()
+        browser.get("https://rousi.zip/index.php")
     except Exception as e:
         print("[错误]：无法访问网站或装载 cookies，请检查网络或 cookies 文件是否损坏，以及网站目前是否可用。错误信息如下：\n"+str(e))
         browser.switch_to.window(blank_window)
@@ -29,7 +31,7 @@ def rousi_sign(browser, cookie_file, blank_window, rank, total):
         return rank
     
     try:
-        sign_label = browser.find_element(by=By.XPATH, value='''//*[@id="info_block"]/tbody/tr/td/table/tbody/tr/td[1]/span/a[5]''')
+        sign_label = WebDriverWait(browser, 10).until(EC.visibility_of_element_located((By.XPATH, '''//*[@id="info_block"]/tbody/tr/td/table/tbody/tr/td[1]/span/a[5]''')))
         if not sign_label.get_attribute("class"):
             print("[警告]：已经签到过了")
         else:
