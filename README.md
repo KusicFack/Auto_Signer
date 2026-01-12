@@ -1,10 +1,10 @@
 # 项目介绍
 **Termux + Selenium + Chromium**：在 Android 手机上实现**随时一键签到所有网站**！📱
 
-注：项目可以自己添加签到脚本。目前提供[吾爱破解](https://www.52pojie.cn/)、[Rousi](https://rousi.zip/index.php)、[Hifini](https://www.hifiti.com/)、[远景论坛](https://bbs.pcbeta.com/)、[科研通](https://www.ablesci.com/)五个网站签到的 Demo。
+注：项目可以自己添加签到脚本。目前提供[吾爱破解](https://www.52pojie.cn/)、[Rousi](https://rousi.pro/)、[Hifini](https://www.hifiti.com/)、[远景论坛](https://bbs.pcbeta.com/)、[科研通](https://www.ablesci.com/)五个网站签到的 Demo。
 
 # 文件准备
-需要签到自动登录用的 cookies，并放入打包为 Auto_Signer.zip 中的 cookies 目录下。项目 Release 界面已经准备了该压缩包，可以把它解压后再进行文件添加，然后再压缩。
+需要签到自动登录用的 cookies 或 tokens，并放入打包为 Auto_Signer.zip 中的 cookies 目录下。项目 Release 界面已经准备了该压缩包，可以把它解压后再进行文件添加，然后再压缩。
 
 获取自动登录 cookies 流程如下：
 1. 首先打开你的浏览器（请使用 Edge 或 Chrome），进入网站进行登录（若有“自动登录”选项记得勾选）
@@ -12,7 +12,13 @@
 3. 选择该扩展下方工具栏最右侧的导出（Export），选择 JSON，此时内容会复制到剪贴板上
 4. 打开模板 cookies 文件下对应的 json 文件（可以用记事本打开），然后粘贴这些内容
 5. 使用有查找和替换功能的记事本进行下列替换："sameSite": null 替换为 "sameSite": "None" ；"sameSite": "lax" 替换为 "sameSite": "Lax"，保存文件
-注：有些网站可能没有永久自动登录的功能，如遇过期还请自行重新生成 cookie.json。
+
+获取自动登录 tokens 流程如下：
+1. 首先打开你的浏览器（请使用 Edge 或 Chrome），进入网站进行登录（若有“自动登录”选项记得勾选）
+2. 登录完成后，在当前页面打开“开发者工具”，切换到“控制台”选项卡，输入“JSON.stringify(localStorage)”，控制台会返回 json 化 token 文本
+3. 打开模板 cookies 文件下对应的 json 文件（可以用记事本打开），然后粘贴这些内容（注意去掉 json 字符串开头和末尾的单引号），保存文件
+
+注：有些网站可能没有永久自动登录的功能，如遇过期还请自行重新生成 cookie.json 或 token.json。
 
 对所有网站都进行上述操作，最后将包含所有文件的 Auto_Signer 文件夹压缩为 Auto_Signer.zip。
 
