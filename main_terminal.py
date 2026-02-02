@@ -2,19 +2,7 @@ from selenium.webdriver.chromium import webdriver
 from selenium.webdriver.chromium.options import ChromiumOptions
 from selenium.webdriver.chromium.service import ChromiumService
 from pyvirtualdisplay import Display
-import os, traceback, sys
-
-if not os.path.exists("last_log.txt"):
-    with open("last_log.txt", "w", encoding="utf-8"):
-        pass
-
-def global_exception_handler(exc_type, exc_value, exc_tb):
-    tb = ''.join(traceback.format_exception(exc_type, exc_value, exc_tb))
-    with open("last_log.txt", "w", encoding="utf-8") as f:
-        f.write("[错误]：\n")
-        f.write(tb)
-
-sys.excepthook = global_exception_handler
+import os
 
 from sign_units.wuai import wuai_sign
 from sign_units.rousi import rousi_sign
@@ -41,11 +29,11 @@ if __name__ == "__main__":
     blank_window = browser.current_window_handle
     
     rank, total = 0, 5
-    rank = wuai_sign(browser, "cookies/wuai_cookie.json", blank_window, rank, total, "last_log.txt")
-    rank = rousi_sign(browser, "cookies/rousi_token.json", blank_window, rank, total, "last_log.txt")
-    rank = hifini_sign(browser, "cookies/hifini_cookie.json", blank_window, rank, total, "last_log.txt")
-    rank = pcbeta_sign(browser, "cookies/pcbeta_cookie.json", blank_window, rank, total, "last_log.txt")
-    rank = ablesci_sign(browser, "cookies/ablesci_cookie.json", blank_window, rank, total, "last_log.txt")
+    rank = wuai_sign(browser, "cookies/wuai_cookie.json", blank_window, rank, total)
+    rank = rousi_sign(browser, "cookies/rousi_token.json", blank_window, rank, total)
+    rank = hifini_sign(browser, "cookies/hifini_cookie.json", blank_window, rank, total)
+    rank = pcbeta_sign(browser, "cookies/pcbeta_cookie.json", blank_window, rank, total)
+    rank = ablesci_sign(browser, "cookies/ablesci_cookie.json", blank_window, rank, total)
     browser.quit()
     
     display.stop()
