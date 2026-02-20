@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 import json, sys, shutil
 
 def rousi_sign(browser, token_file, blank_window, rank, total, temp_file=sys.stdout):
@@ -20,7 +19,7 @@ def rousi_sign(browser, token_file, blank_window, rank, total, temp_file=sys.std
     print("", file=temp_file)
 
     try:
-        print("开始 rousi.pro 签到", file=temp_file)
+        print("开始 rousi 签到", file=temp_file)
         browser.switch_to.new_window("rouzi")
         browser.get("https://rousi.pro/points")
 

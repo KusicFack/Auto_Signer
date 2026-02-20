@@ -18,6 +18,7 @@ sys.excepthook = global_exception_handler
 
 from sign_units.wuai import wuai_sign
 from sign_units.rousi import rousi_sign
+from sign_units.agsvpt import agsvpt_sign
 from sign_units.hifini import hifini_sign
 from sign_units.pcbeta import pcbeta_sign
 from sign_units.ablesci import ablesci_sign
@@ -40,9 +41,10 @@ if __name__ == "__main__":
     browser = webdriver.ChromiumDriver(options=chromium_options, service=chromium_service)
     blank_window = browser.current_window_handle
     
-    rank, total = 0, 5
+    rank, total = 0, 6
     rank = wuai_sign(browser, "cookies/wuai_cookie.json", blank_window, rank, total, "last_log.txt")
     rank = rousi_sign(browser, "cookies/rousi_token.json", blank_window, rank, total, "last_log.txt")
+    rank = agsvpt_sign(browser, "cookies/agsvpt_cookie.json", blank_window, rank, total, "last_log.txt")
     rank = hifini_sign(browser, "cookies/hifini_cookie.json", blank_window, rank, total, "last_log.txt")
     rank = pcbeta_sign(browser, "cookies/pcbeta_cookie.json", blank_window, rank, total, "last_log.txt")
     rank = ablesci_sign(browser, "cookies/ablesci_cookie.json", blank_window, rank, total, "last_log.txt")

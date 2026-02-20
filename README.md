@@ -1,7 +1,7 @@
 # 项目介绍
 **Termux + Selenium + Chromium**：在 Android 手机上实现**随时一键签到所有网站**！📱
 
-注：项目可以自己添加签到脚本。目前提供[吾爱破解](https://www.52pojie.cn/)、[Rousi](https://rousi.pro/)、[Hifini](https://www.hifiti.com/)、[远景论坛](https://bbs.pcbeta.com/)、[科研通](https://www.ablesci.com/)五个网站签到的 Demo。
+注：项目可以自己添加签到脚本。目前提供[吾爱破解](https://www.52pojie.cn/)、[Rousi](https://rousi.pro/)、[AGSVPT]（https://www.agsvpt.com/）、[Hifini](https://www.hifiti.com/)、[远景论坛](https://bbs.pcbeta.com/)、[科研通](https://www.ablesci.com/)六个网站签到的 Demo。
 
 # 文件准备
 需要签到自动登录用的 cookies 或 tokens，并放入打包为 Auto_Signer.zip 中的 cookies 目录下。项目 Release 界面已经准备了该压缩包，可以把它解压后再进行文件添加，然后再压缩。
