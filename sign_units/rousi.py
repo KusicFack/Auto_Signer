@@ -38,11 +38,11 @@ def rousi_sign(browser, token_file, blank_window, rank, total, temp_file=sys.std
         return rank
     
     try:
-        sign_label = WebDriverWait(browser, 10).until(EC.visibility_of_element_located((By.XPATH, '''//*[@id="root"]/div/main/div/div/div[2]/div[3]/div/div''')))
-        if not sign_label.find_elements(By.XPATH, "./div[2]"):
+        sign_label = WebDriverWait(browser, 10).until(EC.visibility_of_element_located((By.XPATH, '''//*[@id="root"]/div/main/div/div/div/div[2]/div[3]/div/div''')))
+        if sign_label.find_elements(By.XPATH, "./button"):
             print("[警告]：已经签到过了", file=temp_file)
         else:
-            sign_label.find_element(By.XPATH, "./div[2]/button[1]").click()
+            sign_label.find_element(By.XPATH, "./div/button[contains(text(), '签到')]").click()
             print("签到成功！", file=temp_file)
     except Exception as e:
         print("[错误]：无法签到！请将下列信息提交给开发者\n"+str(e), file=temp_file)
