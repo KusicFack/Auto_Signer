@@ -21,7 +21,7 @@ def agsvpt_sign(browser, cookie_file, blank_window, rank, total, temp_file=sys.s
     try:
         print("开始 agsvpt 签到", file=temp_file)
         browser.switch_to.new_window("agsvpt")
-        browser.get("https://www.agsvpt.com/")
+        browser.get("https://pt.agsvpt.cn/")
 
         print("清除预设 cookies", file=temp_file)
         browser.delete_all_cookies()
@@ -32,7 +32,7 @@ def agsvpt_sign(browser, cookie_file, blank_window, rank, total, temp_file=sys.s
             browser.add_cookie(cookie)
 
         print("开始签到...", file=temp_file)
-        browser.get("https://www.agsvpt.com/")
+        browser.get("https://pt.agsvpt.cn/")
     except Exception as e:
         print("[错误]：无法访问网站或装载 cookies，请检查网络或 cookies 文件是否损坏，以及网站目前是否可用。错误信息如下：\n"+str(e), file=temp_file)
         browser.switch_to.window(blank_window)
