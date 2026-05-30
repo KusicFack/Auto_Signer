@@ -48,7 +48,7 @@ def wuai_sign(browser, cookie_file, blank_window, rank, total, temp_file=sys.std
         else:
             sign_label = sign_label[0]
             ActionChains(browser).move_to_element(sign_label).click().perform()
-            WebDriverWait(browser, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="um"]/p[2]/a[1]/img')))
+            WebDriverWait(browser, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="um"]/p[2]/img')))
             print("签到成功！更新本地 cookies", file=temp_file)
             cookies = browser.get_cookies()
             json.dump(cookies, open(cookie_file, "w", encoding="utf-8"), ensure_ascii=False, indent=4)
